@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a1c22" />
+  <title>Half Court</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #1a1c22;
+      overflow: hidden;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    #app { position: fixed; inset: 0; }
+    #app canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    #hud {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      font-family: system-ui, sans-serif;
+      color: #fff;
+    }
+    #score {
+      position: absolute;
+      top: 14px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 750;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+      transform-origin: center 40%;
+    }
+    #score.pop { animation: score-pop 0.45s ease; }
+    @keyframes score-pop {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    #role {
+      position: absolute;
+      top: 48px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      opacity: 0.85;
+    }
+    #banner {
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    }
+    #banner.make {
+      top: 64px;
+      font-size: 36px;
+      letter-spacing: 0.06em;
+      color: #ffe08a;
+    }
+    #banner.miss { font-size: 18px; color: #d5dee8; }
+    #banner.whiff { font-size: 18px; color: #f0b4a8; }
+    #readout {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(10, 12, 16, 0.55);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .zone {
+      position: absolute;
+      bottom: 18px;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+    #zone-left { left: 18px; }
+    #zone-right { right: 18px; }
+    #meter {
+      position: absolute;
+      width: 18px;
+      height: 132px;
+      transform: translate(-50%, -50%);
+      border-radius: 11px;
+      background: rgba(8, 10, 14, 0.55);
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      overflow: hidden;
+    }
+    #meter .good {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 35%;
+      height: 30%;
+      background: rgba(120, 200, 120, 0.45);
+    }
+    #meter .perfect {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 43%;
+      height: 14%;
+      background: rgba(210, 255, 160, 0.9);
+    }
+    #knob {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: #fff;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+    }
+    #rotate {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      align-items: center;
+      justify-content: center;
+      background: #14161c;
+      color: white;
+      font-family: system-ui, sans-serif;
+      font-size: 22px;
+      pointer-events: auto;
+    }
+    @media (orientation: portrait) {
+      #rotate { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="hud">
+    <div id="score">YOU 0 · CPU 0</div>
+    <div id="role">OFFENSE</div>
+    <div id="banner"></div>
+    <div id="zone-left" class="zone">dribble</div>
+    <div id="zone-right" class="zone">sprint</div>
+    <div id="readout">Ball R · tap left to skill</div>
+    <div id="meter" hidden>
+      <div class="good"></div>
+      <div class="perfect"></div>
+      <div id="knob"></div>
+    </div>
+  </div>
+  <div id="rotate">Turn your phone sideways</div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
